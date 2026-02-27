@@ -1,2 +1,2 @@
-# ggr472-lab3
+# GGR472 Lab 3
 
