@@ -5,11 +5,11 @@ const map = new mapboxgl.Map({
     container: 'my-map', // ID of the HTML element to contain the map
     style: 'mapbox://styles/chloeloh/cmm9ci4gs001301ry3yjqgd6x', // Map style URL
     center: [-79.3053, 43.6672], // Initial starting position on the Beach BIA
-    zoom: 13.8, // Initial zoom position
     maxBounds: [
         [-79.80, 43.65], // Southwest coordinates of the map bounds
         [-79.25, 43.80] // Northeast coordinates of the map bounds
-    ]   
+    ],
+    zoom: 13.8, // Initial zoom position
 });
 
 // Adds search control to map with plugin as source
