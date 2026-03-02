@@ -5,7 +5,7 @@ const map = new mapboxgl.Map({
     container: 'my-map', // ID of the HTML element to contain the map
     style: 'mapbox://styles/chloeloh/cmm9ci4gs001301ry3yjqgd6x', // Map style URL
     center: [-79.2980, 43.6690], // Initial starting position on the Beach BIA
-    zoom: 14 // Initial zoom position
+    zoom: 12 // Initial zoom position
 });
 
 // Sets map load event listener to add the GeoJSON data source and layer
