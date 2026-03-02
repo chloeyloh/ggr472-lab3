@@ -5,8 +5,29 @@ const map = new mapboxgl.Map({
     container: 'my-map', // ID of the HTML element to contain the map
     style: 'mapbox://styles/chloeloh/cmm9ci4gs001301ry3yjqgd6x', // Map style URL
     center: [-79.3053, 43.6672], // Initial starting position on the Beach BIA
-    zoom: 13.8 // Initial zoom position
+    zoom: 13.8, // Initial zoom position
+    maxBounds: [
+        [-79.35, 43.65], // Southwest coordinates of the map bounds
+        [-79.25, 43.68] // Northeast coordinates of the map bounds
+    ]   
 });
+
+// Adds search control to map with plugin as source
+map.addControl(
+    new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken, // Mapbox access token
+        mapboxgl: mapboxgl, // Mapbox GL instance
+        bbox: [-79.35, 43.65, -79.25, 43.68], // Limit results to maxBounds
+        placeholder: 'Search in the Beaches BIA', // Placeholder text for the search bar
+        marker: false // Disable the default marker that appears when a search result is selected
+    }),
+    'top-left' // Position of the search control on the map
+);
+
+
+// Adding navigation controls to the map (zoom and rotation)
+map.addControl(new mapboxgl.NavigationControl());
+
 
 // Sets map load event listener to add the GeoJSON data source and layer
 map.on('load', () => {
