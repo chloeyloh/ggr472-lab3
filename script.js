@@ -4,7 +4,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiY2hsb2Vsb2giLCJhIjoiY21sZ3UwZWYzMDIyazNocHNmc
 const map = new mapboxgl.Map({
     container: 'my-map', // ID of the HTML element to contain the map
     style: 'mapbox://styles/chloeloh/cmm9ci4gs001301ry3yjqgd6x', // Map style URL
-    center: [-79.3832, 43.6532], // Initial map starting position
+    center: [-79.3832, 43.6532], // Initial starting position in downtown Toronto
     zoom: 12 // Initial zoom position
 });
 
@@ -19,9 +19,6 @@ map.on('load', () => {
     // Adding my GeoJSON for points of interest (coffee, parks, recreation)
     map.addSource('points-of-interest', {
         type: 'geojson',
-        data: 'https://github.com/chloeyloh/ggr472-lab3/blob/main/lab3map.geojson' // Raw link to GeoJSON file in GitHub repository
-
-// Adding navigation controls to the map
-map.addControl(new mapboxgl.NavigationControl(), 'top-right');
-
+        data: 'https://raw.githubusercontent.com/chloeyloh/ggr472-lab3/refs/heads/main/lab3map.geojson' // Raw link to GeoJSON file in GitHub repository
+    });
 
