@@ -30,25 +30,19 @@ map.on('load', () => {
             'icon-image': ['match', ['get', 'category'], // Using the "category" property in the GeoJSON to determine which icon to use
                 'Coffee', 'mug', // If "category" is "coffee", use the "mug" icon
                 'Landmark/Attraction', 'star2', // If "category" is "landmark/attraction", use the "star2" icon
-                'Park/Greenspaces', 'highway-rest-area', // If "category" is "park", use the "park" icon
+                'Parks/Greenspaces', 'highway-rest-area', // If "category" is "park", use the "park" icon
                 'Recreation', 'stadium', // If "category" is "recreation", use the "stadium" icon
                 'marker' // Default icon
             ]
+        },
+        paint: {
+            'icon-color': ['match', ['get', 'category'], // Using the "category" property in the GeoJSON to determine which color to use
+                'Coffee', '#7a2e02ff', // If "category" is "coffee", use brown
+                'Landmark/Attraction', '#fff700ff', // If "category" is "landmark/attraction", use yellow
+                'Parks/Greenspaces', '#008000', // If "category" is "park", use green
+                'Recreation', '#0026ffff', // If "category" is "recreation", use blue
+                '#FFFFFF' // Default color (white)
+            ]
         }
     });
-
-        map.addLayer({
-            id: 'locations-layer',
-            type: 'symbol',
-            source: 'points-of-interest',
-            paint: {
-                'icon-color': ['match', ['get', 'category'], // Using the "category" property in the GeoJSON to determine which color to use
-                    'Coffee', '#7a2e02ff', // If "category" is "coffee", use brown
-                    'Landmark/Attraction', '#fff700ff', // If "category" is "landmark/attraction", use yellow
-                    'Park/Greenspaces', '#008000', // If "category" is "park", use green
-                    'Recreation', '#0026ffff', // If "category" is "recreation", use blue
-                    '#FFFFFF' // Default color (white)
-                ]
-            }
-        });
-    });
+});
