@@ -21,4 +21,4 @@ map.on('load', () => {
         type: 'geojson',
         data: 'https://raw.githubusercontent.com/chloeyloh/ggr472-lab3/refs/heads/main/lab3map.geojson' // Raw link to GeoJSON file in GitHub repository
     });
-
+})
