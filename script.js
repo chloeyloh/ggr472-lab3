@@ -7,8 +7,8 @@ const map = new mapboxgl.Map({
     center: [-79.3053, 43.6672], // Initial starting position on the Beach BIA
     zoom: 13.8, // Initial zoom position
     maxBounds: [
-        [-79.35, 43.65], // Southwest coordinates of the map bounds
-        [-79.25, 43.68] // Northeast coordinates of the map bounds
+        [-79.80, 43.65], // Southwest coordinates of the map bounds
+        [-79.25, 43.80] // Northeast coordinates of the map bounds
     ]   
 });
 
@@ -18,7 +18,7 @@ map.addControl(
         accessToken: mapboxgl.accessToken, // Mapbox access token
         mapboxgl: mapboxgl, // Mapbox GL instance
         bbox: [-79.35, 43.65, -79.25, 43.68], // Limit results to maxBounds
-        placeholder: 'Search in the Beaches BIA', // Placeholder text for the search bar
+        placeholder: 'Search in the Beaches BIA', // Placeholder text in the search bar
         marker: false // Disable the default marker that appears when a search result is selected
     }),
     'top-left' // Position of the search control on the map
