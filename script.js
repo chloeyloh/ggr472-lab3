@@ -25,7 +25,7 @@ map.addControl(
 );
 
 
-// Adding navigation controls to the map (zoom and rotation)
+// Adds navigation controls to the map (zoom and rotation)
 map.addControl(new mapboxgl.NavigationControl());
 
 
