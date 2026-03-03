@@ -19,3 +19,6 @@ This lab is a prototype and supplement for our collaboration with the Beach BIA,
 * **Pop-up Windows:** Clicking on a feature opens a pop-up window displaying the `name` and `address` of the location.
 * **Hover:** Uses `feature-state` logic to change the visual appearance (opacity) of icons when a user hovers over them.
 * **Spatial Constraints:** The map uses `maxBounds` to keep the user focused on the study area, preventing panning away from the BIA core.
+
+**Author**: Chloe Loh
+**Course**: GGR472: Developing Web Maps 
