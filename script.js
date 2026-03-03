@@ -40,7 +40,8 @@ map.on('load', () => {
     // Adding my GeoJSON for points of interest (coffee, parks, recreation)
     map.addSource('points-of-interest', {
         type: 'geojson',
-        data: 'https://raw.githubusercontent.com/chloeyloh/ggr472-lab3/refs/heads/main/lab3map.geojson' // Raw link to GeoJSON file in GitHub repository
+        data: 'https://raw.githubusercontent.com/chloeyloh/ggr472-lab3/refs/heads/main/lab3map.geojson', // Raw link to GeoJSON file in GitHub repository
+        generateId: true // Automatically generate unique IDs for each feature in the GeoJSON for my event listeners
     });
 
     map.addLayer({
@@ -55,17 +56,80 @@ map.on('load', () => {
                 'Recreation', 'stadium', // If "category" is "recreation", use the "stadium" icon
                 'marker' // Default icon
             ],
-            'icon-size': 1.5, // Size of the icons
+            'icon-size': [
+                'case',
+                ['boolean', ['feature-state', 'hover'], false], // If the "hover" state is true for a feature, use the larger size
+                2.0, // Size of the icon when hovered
+                1.5 // Default size of the icon
+            ],
             'icon-allow-overlap': true // Allow icons to overlap each other
         },
         paint: {
+            'icon-opacity': [
+                'case',
+                ['boolean', ['feature-state', 'hover'], false], // If the "hover" state is true for a feature, use full opacity
+                1.0, // Opacity when hovered
+                0.7 // Default opacity
+            ],
             'icon-color': ['match', ['get', 'category'], // Using the "category" property in the GeoJSON to determine which color to use
-                'Coffee', '#7a2e02ff', // If "category" is "coffee", use brown
-                'Landmark/Attraction', '#fff700ff', // If "category" is "landmark/attraction", use yellow
+                'Coffee', '#7a2e02', // If "category" is "coffee", use brown
+                'Landmark/Attraction', '#fff700', // If "category" is "landmark/attraction", use yellow
                 'Parks/Greenspaces', '#008000', // If "category" is "park", use green
-                'Recreation', '#0026ffff', // If "category" is "recreation", use blue
+                'Recreation', '#0026ff', // If "category" is "recreation", use blue
                 '#FFFFFF' // Default color (white)
             ]
         }
     });
+
+    // Creating click and hover events for the points of interest layer on the map
+    let locID = null; // Variable to store the ID of the currently hovered feature
+
+    // Adding event listener for mouse movement over the points of interest layer to create hover effect
+    map.on('mousemove', 'locations-layer', (e) => {
+        if (e.features.length > 0) {
+            map.getCanvas().style.cursor = 'pointer'; // Change cursor to pointer when hovering over a feature
+
+            // Reset the hover state of the previously hovered feature
+            if (locID !== null) {
+                map.setFeatureState(
+                    { source: 'points-of-interest', id: locID },
+                    { hover: false }
+                );
+            }
+
+            locID = e.features[0].id; // Get the ID of the currently hovered feature
+
+            // Set the hover state of the currently hovered feature to true
+            map.setFeatureState(
+                { source: 'points-of-interest', id: locID },
+                { hover: true }
+            );
+        }
+    });
+
+    // Adding event listener for mouse leaving the points of interest layer to reset hover effect
+    map.on('mouseleave', 'locations-layer', () => {
+        if (locID !== null) {
+            map.setFeatureState(
+                { source: 'points-of-interest', id: locID },
+                { hover: false }
+            );
+        }
+        locID = null; // Reset the locID variable when the mouse leaves the layer
+        map.getCanvas().style.cursor = ''; // Reset cursor to default
+    });
+
+    // Adding event listener for clicks on the points of interest layer to display a popup with information about the location
+    map.on('click', 'locations-layer', (e) => {
+        const name = e.features[0].properties.name; // Get the "name" property of the clicked feature
+        const address = e.features[0].properties.address; // Get the "address" property of the clicked feature
+        
+        new mapboxgl.Popup()
+            .setLngLat(e.features[0].geometry.coordinates) // Set the popup location to the coordinates of the clicked feature
+            .setHTML(`<strong>${name}</strong><p>${address}</p>`) // Set the HTML content of the popup to display the name and address of the location
+            .addTo(map); // Add the popup to the map
+    }
+    );
 });
+
+            
