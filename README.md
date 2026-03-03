@@ -5,7 +5,7 @@ https://chloeyloh.github.io/ggr472-lab3/
 ### Overview
 This lab is a prototype and supplement for our collaboration with the Beach BIA, which will be highlighting the community's parks and recreation features while also drawing attention to their commercial strip. 
 
-### Map Features and Symbology
+### 1. Map Features and Symbology
 * **Classified Layer:** Uses `match` expression to classify GeoJSON data into four categories: **Coffee**, **Landmarks/Attractions**, **Parks/Greenspaces**, and **Recreation**.
 * **Custom Icons:** Each category is represented by a unique icon (custom .svg imported for icons; `mug` for coffee, `stadium` for recreation).
 * **Color Coding:** Points are assigned specific hex colors to differentiate category types.
