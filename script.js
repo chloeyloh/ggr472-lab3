@@ -68,45 +68,4 @@ map.on('load', () => {
             ]
         }
     });
-
-    // Change cursor to pointer when hovering over a point of interest
-    map.on('mouseenter', 'locations-layer', (e) => {
-        map.getCanvas().style.cursor = 'pointer'; // Change cursor to pointer when hovering over a point of interest
-    });
-
-    // Change cursor back to default when not hovering over a point of interest
-    map.on('mouseleave', 'locations-layer', () => {
-        map.getCanvas().style.cursor = '';
-    });
-
-    // Adding a hover effect to the points of interest layer to show a popup with the name of the location
-    const hoverPopup = new mapboxgl.Popup({
-        closeButton: false, // Disable the default close button on the popup
-        closeOnClick: false // Disable closing the popup when clicking on the map
-    });
-
-    map.on('mousemove', 'locations-layer', (e) => {
-        console.log('Hovered over:', e.features[0].properties.name); // Log the name of the location being hovered over to the console
-        if (e.features.length > 0) {
-            map.getCanvas().style.cursor = 'pointer'; // Change cursor to pointer when hovering over a point of interest
-
-            const feature = e.features[0]; // Get the first feature that the mouse is hovering over
-            const coordinates = feature.geometry.coordinates.slice(); // Get the coordinates of the feature
-            const name = feature.properties.name; // Get the "name" property from the feature's properties
-
-            // Ensure that if the map is zoomed out such that multiple copies of the feature are visible, the popup appears over the copy being hovered over
-            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-            }
-
-            hoverPopup.setLngLat(coordinates).setHTML(`<strong>${name}</strong>`).addTo(map); // Set the popup's position and content, then add it to the map
-        }
-    });
-
-    map.on('mouseleave', 'locations-layer', () => {
-        map.getCanvas().style.cursor = ''; // Change cursor back to default when not hovering over a point of interest
-        hoverPopup.remove(); // Remove the popup when the mouse leaves the point of interest
-    });
-
 });
-
