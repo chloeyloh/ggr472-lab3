@@ -18,7 +18,7 @@ map.addControl(
         accessToken: mapboxgl.accessToken, // Mapbox access token
         mapboxgl: mapboxgl, // Mapbox GL instance
         bbox: [-79.35, 43.65, -79.25, 43.68], // Limit results to maxBounds
-        placeholder: 'Search in the Beaches BIA', // Placeholder text in the search bar
+        placeholder: 'Search in the Beach BIA', // Placeholder text in the search bar
         marker: false // Disable the default marker that appears when a search result is selected
     }),
     'top-left' // Position of the search control on the map
@@ -54,7 +54,9 @@ map.on('load', () => {
                 'Parks/Greenspaces', 'highway-rest-area', // If "category" is "park", use the "park" icon
                 'Recreation', 'stadium', // If "category" is "recreation", use the "stadium" icon
                 'marker' // Default icon
-            ]
+            ],
+            'icon-size': 1.5, // Size of the icons
+            'icon-allow-overlap': true // Allow icons to overlap each other
         },
         paint: {
             'icon-color': ['match', ['get', 'category'], // Using the "category" property in the GeoJSON to determine which color to use
@@ -67,3 +69,4 @@ map.on('load', () => {
         }
     });
 });
+
