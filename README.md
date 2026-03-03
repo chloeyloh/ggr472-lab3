@@ -21,4 +21,4 @@ This lab is a prototype and supplement for our collaboration with the Beach BIA,
 * **Spatial Constraints:** The map uses `maxBounds` to keep the user focused on the study area, preventing panning away from the BIA core.
 
 **Author**: Chloe Loh
-**Course**: GGR472: Developing Web Maps 
+**Course**: GGR472 - Developing Web Maps 
