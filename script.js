@@ -86,6 +86,7 @@ map.on('load', () => {
     });
 
     map.on('mousemove', 'locations-layer', (e) => {
+        console.log('Hovered over:', e.features[0].properties.name); // Log the name of the location being hovered over to the console
         if (e.features.length > 0) {
             map.getCanvas().style.cursor = 'pointer'; // Change cursor to pointer when hovering over a point of interest
 
